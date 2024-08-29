@@ -44,16 +44,19 @@ pipeline {
             }
         }
 
-        stage('Publish') {
+        stage('Stop IIS and Publish') {
             steps {
-                echo "Publish Path: D:\\IIS\\Jenkins.Demo.Web"
-                Stop-WebAppPool -Name "Jenkins.Demo.Web"
-                Stop-Website -Name "Jenkins.Demo.Web"
+                echo 'Stopping IIS and Publishing'
                 dir("${env.WORKING_DIR}") {
-                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj -o D:\\IIS\\Jenkins.Demo.Web'
+                    // Stopping IIS Application Pool
+                    bat 'powershell Stop-WebAppPool -Name "Jenkins.Demo.Web"'
+
+                    // Publish the Web Application
+                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=Jenkins.Demo.Web/Properties/LocalIIS.pubxml'
+
+                    // Starting IIS Application Pool
+                    bat 'powershell Start-WebAppPool -Name "Jenkins.Demo.Web"'
                 }
-                Start-WebAppPool -Name "Jenkins.Demo.Web"
-                Start-Website -Name "Jenkins.Demo.Web"
             }
         }
     }
