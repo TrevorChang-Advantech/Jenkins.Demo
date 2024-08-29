@@ -49,7 +49,7 @@ pipeline {
                 script {
                     echo "Publish Path: D:\\IIS\\Jenkins.Demo.Web"
                     dir("${env.WORKING_DIR}") {
-                        bat "dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=${env.PUBLISH_PROFILE}.pubxml --verbosity detailed"
+                        bat "dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=LocalIIS.pubxml --verbosity detailed"
                     }
                 }
             }
