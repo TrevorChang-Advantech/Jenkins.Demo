@@ -23,7 +23,7 @@ pipeline {
         stage('Restoring') {
             steps {
                 echo 'Restoring NuGet packages'
-                bat 'dotnet restore Jenkins.Demo.sln --configfile .nuget\nuget.config --verbosity detailed'
+                bat 'dotnet restore Jenkins.Demo.sln --configfile "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Jenkins.Demo_master\\.nuget\\nuget.config" --verbosity detailed'
             }
         }
 
