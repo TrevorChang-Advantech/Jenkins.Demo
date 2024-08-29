@@ -35,7 +35,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat 'dotnet build --configuration Release --verbosity detailed'
+                    bat 'dotnet build Jenkins.Demo.sln --configuration Release --verbosity detailed'
                 }
             }
         }
