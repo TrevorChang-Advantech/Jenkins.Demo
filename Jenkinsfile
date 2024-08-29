@@ -13,7 +13,9 @@ pipeline {
         stage('Echo') {
             steps {
                 script {
-                    echo 'CI/ CD Start'
+                    echo 'CI/CD Start'
+                    echo "Current LANG: ${env.LANG}"
+                    echo "Current LC_ALL: ${env.LC_ALL}"
                 }
             }
         }
@@ -35,6 +37,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // 切换到 UTF-8 编码，防止乱码
+                    bat 'chcp 65001'
                     bat 'dotnet build Jenkins.Demo.sln --configuration Release --verbosity detailed'
                 }
             }
@@ -43,7 +47,9 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    bat 'dotnet test --logger "trx;LogFileName=unit_tests.xml"'
+                    // 切换到 UTF-8 编码，防止乱码
+                    bat 'chcp 65001'
+                    bat 'dotnet test Jenkins.Demo.sln --logger "trx;LogFileName=unit_tests.xml" --verbosity detailed'
                 }
             }
         }
@@ -51,7 +57,10 @@ pipeline {
         stage('Publish') {
             steps {
                 script {
-                    bat "dotnet publish --configuration Release --output ${env.PUBLISH_DIR}"
+                    bat "mkdir ${env.PUBLISH_DIR}"
+                    // 切换到 UTF-8 编码，防止乱码
+                    bat 'chcp 65001'
+                    bat "dotnet publish Jenkins.Demo.sln --configuration Release --output ${env.PUBLISH_DIR}"
                 }
             }
         }
