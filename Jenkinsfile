@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo 'Running Tests'
                 dir("${env.WORKING_DIR}") {
-                    bat 'dotnet test Jenkins.Demo.Tests/Jenkins.Demo.Tests.csproj --configuration Release --no-build --verbosity detailed'
+                    bat 'dotnet test Jenkins.Demo.UnitTest/Jenkins.Demo.UnitTest.csproj --configuration Release --no-build --verbosity detailed'
                 }
             }
         }
