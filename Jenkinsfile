@@ -15,10 +15,20 @@ pipeline {
             }
         }
 
-        stage('Restore') {
+        stage('Restore Web') {
             steps {
                 script {
-                    bat 'dotnet restore'
+                    echo 'Restoring NuGet packages for Web project...'
+                    bat 'dotnet restore Jenkins.Demo.Web/Jenkins.Demo.Web.csproj'
+                }
+            }
+        }
+
+        stage('Restore Unit Tests') {
+            steps {
+                script {
+                    echo 'Restoring NuGet packages for Unit Test project...'
+                    bat 'dotnet restore Jenkins.Demo.UnitTest/Jenkins.Demo.UnitTest.csproj'
                 }
             }
         }
