@@ -14,10 +14,11 @@ pipeline {
                 }
             }
         }
-
-        steps {
-            echo 'Restoring NuGet packages'
-            bat 'dotnet restore Jenkins.Demo.sln'
+        stage('Restoring') {
+            steps {
+                echo 'Restoring NuGet packages'
+                bat 'dotnet restore Jenkins.Demo.sln'
+            }
         }
 
         stage('Build') {
