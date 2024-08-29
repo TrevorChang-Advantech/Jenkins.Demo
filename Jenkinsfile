@@ -52,7 +52,7 @@ pipeline {
                     bat 'powershell Stop-WebAppPool -Name "Jenkins.Demo.Web"'
 
                     // Publish the Web Application
-                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=Jenkins.Demo.Web/Properties/LocalIIS.pubxml'
+                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj -o D:\\IIS\\Jenkins.Demo.Web'
 
                     // Starting IIS Application Pool
                     bat 'powershell Start-WebAppPool -Name "Jenkins.Demo.Web"'
