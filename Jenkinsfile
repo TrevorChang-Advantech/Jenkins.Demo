@@ -27,16 +27,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    // 切换到 UTF-8 编码，防止乱码
-                    bat 'chcp 65001'
-                    bat 'dotnet build Jenkins.Demo.sln --configuration Release --verbosity detailed'
-                }
-            }
-        }
-
         stage('Test') {
             steps {
                 script {
