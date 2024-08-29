@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOTNET_CLI_HOME = '.dotnet'
         WORKING_DIR = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Jenkins.Demo_master'
-        PUBLISH_DIR = 'D:\\IIS\\Jenkins.Demo.Web'
+        PUBLISH_PROFILE = 'LocalIIS'
         JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
         LANG = 'en_US.UTF-8'
         LC_ALL = 'en_US.UTF-8'
@@ -46,7 +46,7 @@ pipeline {
                     dir("${env.WORKING_DIR}") {
                         // 切换到 UTF-8 编码，防止乱码
                         bat 'chcp 65001'
-                        bat "dotnet publish Jenkins.Demo.sln --configuration Release --output ${env.PUBLISH_DIR}"
+                        bat "dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=${env.PUBLISH_PROFILE}.pubxml"
                     }
                 }
             }
