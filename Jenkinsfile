@@ -14,17 +14,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Clean NuGet Cache') {
+            steps {
+                echo 'Cleaning NuGet Cache'
+                bat 'dotnet nuget locals all --clear'
+            }
+        }
+
         stage('Restoring') {
             steps {
                 echo 'Restoring NuGet packages'
-                bat 'dotnet restore Jenkins.Demo.sln'
+                bat 'dotnet restore Jenkins.Demo.sln --verbosity detailed'
             }
         }
 
         stage('Build') {
             steps {
                 script {
-                    bat 'dotnet build --configuration Release'
+                    bat 'dotnet build --configuration Release --verbosity detailed'
                 }
             }
         }
