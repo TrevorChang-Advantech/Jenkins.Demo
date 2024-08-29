@@ -21,6 +21,15 @@ pipeline {
             }
         }
 
+        stage('Clean Publish Directory') {
+            steps {
+                script {
+                    bat 'rmdir /S /Q null'
+                    bat "rmdir /S /Q ${env.PUBLISH_DIR}"
+                }
+            }
+        }
+
         stage('Restoring') {
             steps {
                 echo 'Restoring NuGet packages'
@@ -35,6 +44,15 @@ pipeline {
                 echo 'Building Web Project'
                 dir("${env.WORKING_DIR}") {
                     bat 'dotnet build Jenkins.Demo.Web/Jenkins.Demo.Web.csproj --configuration Release --verbosity detailed'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo 'Running Tests'
+                dir("${env.WORKING_DIR}") {
+                    bat 'dotnet test Jenkins.Demo.Tests/Jenkins.Demo.Tests.csproj --configuration Release --no-build --verbosity detailed'
                 }
             }
         }
