@@ -13,7 +13,6 @@ pipeline {
                 script {
                     echo 'CI/CD Start'
                     echo "Current LANG: ${env.LANG}"
-                    echo "Current LC_ALL: ${env.LC_ALL}"
                 }
             }
         }
@@ -48,8 +47,9 @@ pipeline {
         stage('Publish') {
             steps {
                 script {
+                    echo "Publish Path: D:\\IIS\\Jenkins.Demo.Web"
                     dir("${env.WORKING_DIR}") {
-                        bat "dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=${env.PUBLISH_PROFILE}.pubxml"
+                        bat "dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=${env.PUBLISH_PROFILE}.pubxml --verbosity detailed"
                     }
                 }
             }
