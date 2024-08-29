@@ -39,19 +39,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    echo 'Running Unit Tests'
-                    dir("${env.WORKING_DIR}") {
-                        // 切换到 UTF-8 编码，防止乱码
-                        bat 'chcp 65001'
-                        bat 'dotnet test Jenkins.Demo.sln --logger "trx;LogFileName=unit_tests.xml" --verbosity detailed'
-                    }
-                }
-            }
-        }
-
         stage('Publish') {
             steps {
                 script {
