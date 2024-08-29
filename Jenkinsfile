@@ -47,9 +47,13 @@ pipeline {
         stage('Publish') {
             steps {
                 echo "Publish Path: D:\\IIS\\Jenkins.Demo.Web"
+                Stop-WebAppPool -Name "Jenkins.Demo.Web"
+                Stop-Website -Name "Jenkins.Demo.Web"
                 dir("${env.WORKING_DIR}") {
                     bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj -o D:\\IIS\\Jenkins.Demo.Web'
                 }
+                Start-WebAppPool -Name "Jenkins.Demo.Web"
+                Start-Website -Name "Jenkins.Demo.Web"
             }
         }
     }
