@@ -4,6 +4,9 @@ pipeline {
     environment {
         DOTNET_CLI_HOME = '.dotnet'
         PUBLISH_DIR = 'D:\\IIS\\Jenkins.Demo.Web'
+        JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
+        LANG = 'en_US.UTF-8'
+        LC_ALL = 'en_US.UTF-8'
     }
 
     stages {
