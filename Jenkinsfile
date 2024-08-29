@@ -20,17 +20,10 @@ pipeline {
             }
         }
 
-        stage('Clean NuGet Cache') {
-            steps {
-                echo 'Cleaning NuGet Cache'
-                bat 'dotnet nuget locals all --clear'
-            }
-        }
-
         stage('Restoring') {
             steps {
                 echo 'Restoring NuGet packages'
-                bat 'dotnet restore Jenkins.Demo.sln --verbosity detailed'
+                bat 'dotnet restore Jenkins.Demo.sln --configfile .nuget\nuget.config --verbosity detailed'
             }
         }
 
