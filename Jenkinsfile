@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo "Publish Path: D:\\IIS\\Jenkins.Demo.Web"
                 dir("${env.WORKING_DIR}") {
-                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=Jenkins.Demo.Web/Properties/LocalIIS.pubxml'
+                    bat 'dotnet publish Jenkins.Demo.Web/Jenkins.Demo.Web.csproj /p:PublishProfile=Jenkins.Demo.Web/Properties/PublishProfiles/LocalIIS.pubxml /p:PublishUrl=D:\IIS\Jenkins.Demo.Web'
                 }
             }
         }
