@@ -7,6 +7,14 @@ pipeline {
     }
 
     stages {
+        stage('Echo') {
+            steps {
+                script {
+                    echo 'CI/ CD Start'
+                }
+            }
+        }
+
         stage('Restore') {
             steps {
                 script {
